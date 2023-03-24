@@ -96,8 +96,12 @@ public class TheIconicSDK {
     }
 
     public HttpRequest.BodyPublisher ofFormData(Map<Object, Object> data) {
+        return HttpRequest.BodyPublishers.ofString(toQueryString(data));
+    }
+
+    public String toQueryString(Map<? extends Object, ? extends Object> data) {
         var builder = new StringBuilder();
-        for (Map.Entry<Object, Object> entry : data.entrySet()) {
+        for (Map.Entry<? extends Object, ? extends Object> entry : data.entrySet()) {
             if (builder.length() > 0) {
                 builder.append("&");
             }
@@ -105,7 +109,7 @@ public class TheIconicSDK {
             builder.append("=");
             builder.append(URLEncoder.encode(entry.getValue().toString(), StandardCharsets.UTF_8));
         }
-        return HttpRequest.BodyPublishers.ofString(builder.toString());
+        return builder.toString();
     }
 
     @SneakyThrows
