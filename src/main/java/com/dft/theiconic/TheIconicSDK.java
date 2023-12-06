@@ -2,8 +2,6 @@ package com.dft.theiconic;
 
 import com.dft.theiconic.handler.JsonBodyHandler;
 import com.dft.theiconic.model.AccessCredentials;
-import com.dft.theiconic.model.order.OrdersResponse;
-import com.dft.theiconic.model.productset.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 
@@ -17,7 +15,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -113,7 +110,9 @@ public class TheIconicSDK {
     }
 
     @SneakyThrows
-    protected HttpRequest post(String path, final String jsonBody) {
+    protected HttpRequest post(String path, Object object) {
+        String jsonBody = objectMapper.writeValueAsString(object);
+
         if (LocalDateTime.now().isAfter(expireAt)) {
             refreshAccessToken();
         }
@@ -159,6 +158,16 @@ public class TheIconicSDK {
                 .thenComposeAsync(response -> tryResend(client, request, handler, response, 1))
                 .get()
                 .body();
+    }
+
+    @SneakyThrows
+    public <T> T deleteRequestWrapped(HttpRequest request, HttpResponse.BodyHandler<T> handler) {
+
+        return client
+            .sendAsync(request, handler)
+            .thenComposeAsync(response -> tryResend(client, request, handler, response, 1))
+            .get()
+            .body();
     }
 
     @SneakyThrows
