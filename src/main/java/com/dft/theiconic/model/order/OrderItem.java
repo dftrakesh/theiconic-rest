@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
+import java.util.HashMap;
+
 @Data
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -49,7 +51,7 @@ public class OrderItem {
     private String updatedAt;
     private String lastStatusChangedAt;
     private String warehouseName;
-    private String extraAttributes;
+    private HashMap<String, String> extraAttributes;
     private Boolean isHybrid;
     private Boolean isOutlet;
 }

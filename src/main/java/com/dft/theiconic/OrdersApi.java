@@ -3,9 +3,8 @@ package com.dft.theiconic;
 import com.dft.theiconic.handler.JsonBodyHandler;
 import com.dft.theiconic.model.Pagination;
 import com.dft.theiconic.model.order.Order;
+import com.dft.theiconic.model.order.OrderItemsResponse;
 import com.dft.theiconic.model.order.OrdersResponse;
-import com.dft.theiconic.model.productset.Item;
-import com.dft.theiconic.model.productset.ProductSetsResponse;
 
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -15,8 +14,9 @@ import java.util.List;
 
 public class OrdersApi extends TheIconicSDK {
 
-    private static final String V2_ORDERS = "/v2/orders";
     private static final String DEFAULT_LIMIT = "50";
+    private static final String V2_ORDERS = "/v2/orders";
+    private static final String V2_ORDER_ITEMS = "/v2/order-items";
 
     public OrdersApi(String instance, String clientId, String clientSecret) {
         super(instance, clientId, clientSecret);
@@ -33,6 +33,19 @@ public class OrdersApi extends TheIconicSDK {
         String path = V2_ORDERS + "?" + toQueryString(parameters);
         HttpRequest request = get(path);
         HttpResponse.BodyHandler<OrdersResponse> handler = new JsonBodyHandler<>(OrdersResponse.class);
+        return getRequestWrapped(request, handler);
+    }
+
+    public OrdersResponse getOrderById(String orderId) {
+        String path = String.format(V2_ORDERS, orderId);
+        HttpRequest request = get(path);
+        HttpResponse.BodyHandler<OrdersResponse> handler = new JsonBodyHandler<>(OrdersResponse.class);
+        return getRequestWrapped(request, handler);
+    }
+
+    public OrderItemsResponse getOrderItems() {
+        HttpRequest request = get(V2_ORDER_ITEMS);
+        HttpResponse.BodyHandler<OrderItemsResponse> handler = new JsonBodyHandler<>(OrderItemsResponse.class);
         return getRequestWrapped(request, handler);
     }
 

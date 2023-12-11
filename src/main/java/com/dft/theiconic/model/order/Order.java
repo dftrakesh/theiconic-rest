@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Data
@@ -35,7 +36,7 @@ public class Order {
     private String exchangeByOrderId;
     private String exchangeForOrderId;
     private String source;
-    private String extraAttributes;
+    private HashMap<String, String> extraAttributes;
     private StatusList statusList;
     private String itemCount;
     private String unitPriceSumWithFees;

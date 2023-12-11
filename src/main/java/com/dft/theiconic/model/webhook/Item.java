@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 public class Item {
     public String publicId;
+    public String name;
     public int sellerId;
     public String callbackUrl;
     public String creationSource;
