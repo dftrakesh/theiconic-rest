@@ -15,6 +15,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderItemsResponse {
 
-    private List<Order> items;
+    private List<OrderItem> items;
     private Pagination pagination;
 }
