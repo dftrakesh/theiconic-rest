@@ -12,6 +12,7 @@ public class WebhooksApi extends TheIconicSDK {
 
     private static final String V2_WEBHOOKS = "/v2/webhooks";
     private static final String V2_WEBHOOK = "/v2/webhook";
+    private static final String V2_WEBHOOK_ENTITIES = "/v2/webhook-entities";
 
     protected WebhooksApi(String instance, String clientId, String clientSecret) {
         super(instance, clientId, clientSecret);
@@ -19,6 +20,12 @@ public class WebhooksApi extends TheIconicSDK {
 
     public WebhooksWrapper getWebhooks() {
         HttpRequest request = get(V2_WEBHOOKS);
+        HttpResponse.BodyHandler<WebhooksWrapper> handler = new JsonBodyHandler<>(WebhooksWrapper.class);
+        return getRequestWrapped(request, handler);
+    }
+
+    public WebhooksWrapper getWebhooksEntities() {
+        HttpRequest request = get(V2_WEBHOOK_ENTITIES);
         HttpResponse.BodyHandler<WebhooksWrapper> handler = new JsonBodyHandler<>(WebhooksWrapper.class);
         return getRequestWrapped(request, handler);
     }
