@@ -3,6 +3,7 @@ package com.dft.theiconic;
 import com.dft.theiconic.handler.JsonBodyHandler;
 import com.dft.theiconic.model.Pagination;
 import com.dft.theiconic.model.order.Order;
+import com.dft.theiconic.model.order.OrderItemsResponse;
 import com.dft.theiconic.model.order.OrdersResponse;
 
 import java.net.http.HttpRequest;
@@ -35,16 +36,16 @@ public class OrdersApi extends TheIconicSDK {
         return getRequestWrapped(request, handler);
     }
 
-    public OrdersResponse getOrders(String orderId) {
+    public OrdersResponse getOrderById(String orderId) {
         String path = String.format(V2_ORDERS, orderId);
         HttpRequest request = get(path);
         HttpResponse.BodyHandler<OrdersResponse> handler = new JsonBodyHandler<>(OrdersResponse.class);
         return getRequestWrapped(request, handler);
     }
 
-    public OrdersResponse getOrderItems() {
+    public OrderItemsResponse getOrderItems() {
         HttpRequest request = get(V2_ORDER_ITEMS);
-        HttpResponse.BodyHandler<OrdersResponse> handler = new JsonBodyHandler<>(OrdersResponse.class);
+        HttpResponse.BodyHandler<OrderItemsResponse> handler = new JsonBodyHandler<>(OrderItemsResponse.class);
         return getRequestWrapped(request, handler);
     }
 
