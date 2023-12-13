@@ -14,7 +14,7 @@ public class WebhooksApi extends TheIconicSDK {
     private static final String V2_WEBHOOK = "/v2/webhook";
     private static final String V2_WEBHOOK_ENTITIES = "/v2/webhook-entities";
 
-    protected WebhooksApi(String instance, String clientId, String clientSecret) {
+    public WebhooksApi(String instance, String clientId, String clientSecret) {
         super(instance, clientId, clientSecret);
     }
 
