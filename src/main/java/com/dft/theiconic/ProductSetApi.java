@@ -13,6 +13,7 @@ public class ProductSetApi extends TheIconicSDK {
 
     private static final int DEFAULT_LIMIT = 50;
     private static final String V2_PRODUCT_SETS = "/v2/product-sets";
+    private static final String V2_PRODUCT_SET = "/v2/product-set/";
     private static final String V2_PRODUCT_SHOP_SKU = "/v2/product/shop-sku/%s";
     private static final String V2_STOCK_PRODUCT_SET = "/v2/stock/product-set/%s";
     private static final String V2_PRODUCT_SELLER_SKU = "/v2/product/seller-sku/%s";
@@ -26,6 +27,13 @@ public class ProductSetApi extends TheIconicSDK {
         String path = V2_PRODUCT_SETS + "?" + "limit=" + limit + "&" + "offset=" + offset;
         HttpRequest request = get(path);
         HttpResponse.BodyHandler<ProductSetsResponse> handler = new JsonBodyHandler<>(ProductSetsResponse.class);
+        return getRequestWrapped(request, handler);
+    }
+
+    public Item getProductSetById(Integer productSetId) {
+        String path = V2_PRODUCT_SET + productSetId;
+        HttpRequest request = get(path);
+        HttpResponse.BodyHandler<Item> handler = new JsonBodyHandler<>(Item.class);
         return getRequestWrapped(request, handler);
     }
 
