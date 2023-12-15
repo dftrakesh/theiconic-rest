@@ -5,7 +5,7 @@
 
     <groupId>io.github.dftrakesh</groupId>
     <artifactId>theiconic-rest</artifactId>
-    <version>14.12.2023</version>
+    <version>15.12.2023</version>
     <packaging>jar</packaging>
 
     <name>theiconic-rest</name>
