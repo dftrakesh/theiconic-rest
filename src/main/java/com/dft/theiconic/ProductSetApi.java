@@ -30,7 +30,7 @@ public class ProductSetApi extends TheIconicSDK {
         return getRequestWrapped(request, handler);
     }
 
-    public Item getProductSetById(Integer productSetId) {
+    public Item getProductSetById(String productSetId) {
         String path = V2_PRODUCT_SET + productSetId;
         HttpRequest request = get(path);
         HttpResponse.BodyHandler<Item> handler = new JsonBodyHandler<>(Item.class);
